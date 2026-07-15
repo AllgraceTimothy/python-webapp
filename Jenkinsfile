@@ -1,6 +1,10 @@
 pipeline {
     agent any
 
+    environment {
+        IMAGE_NAME = "python-webapp"
+    }
+
     stages {
 
         stage('Checkout') {
@@ -26,25 +30,30 @@ pipeline {
             }
         }
 
-        stage('Finished') {
+        stage('Build Docker Image') {
             steps {
-                echo 'Pipeline completed successfully!'
+                sh '''
+                    docker build -t ${IMAGE_NAME}:latest .
+                '''
             }
         }
+
+        stage('Show Docker Images') {
+            steps {
+                sh 'docker images'
+            }
+        }
+
     }
 
     post {
-        always {
-            echo 'Cleaning workspace...'
-            cleanWs()
-        }
 
         success {
-            echo 'SUCCESS!'
+            echo 'Pipeline completed successfully!'
         }
 
         failure {
-            echo 'Pipeline FAILED!'
+            echo 'Pipeline failed.'
         }
     }
 }
