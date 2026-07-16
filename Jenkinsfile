@@ -2,7 +2,8 @@ pipeline {
     agent any
 
     environment {
-        IMAGE_NAME = "python-webapp"
+        IMAGE_NAME = "flask-demo"
+        CONTAINER_NAME = "flask-demoapp"
     }
 
     stages {
@@ -13,39 +14,30 @@ pipeline {
             }
         }
 
-        stage('Verify Python') {
+        stage('Build Image') {
             steps {
-                sh '''
-                    python3 --version
-                    pip3 --version
-                '''
+                sh "docker build -t ${IMAGE_NAME} ."
             }
         }
 
-        stage('Build Docker Image') {
+        stage('Stop Old Container') {
             steps {
-                sh '''
-                    docker build -t ${IMAGE_NAME}:latest .
-                '''
+                sh """
+                    docker stop ${CONTAINER_NAME} || true
+                    docker rm ${CONTAINER_NAME} || true
+                """
             }
         }
 
-        stage('Show Docker Images') {
+        stage('Run Container') {
             steps {
-                sh 'docker images'
+                sh """
+                    docker run -d \
+                    --name ${CONTAINER_NAME} \
+                    -p 5001:5000 \
+                    ${IMAGE_NAME}
+                """
             }
-        }
-
-    }
-
-    post {
-
-        success {
-            echo 'Pipeline completed successfully!'
-        }
-
-        failure {
-            echo 'Pipeline failed.'
         }
     }
 }
