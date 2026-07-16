@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Flask App{% endblock %}</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+        .container {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 800px;
+            width: 100%;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            margin-top: 40px;
+        }
+        h1 {
+            color: #333;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .nav {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+        .nav a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+            padding: 8px 20px;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            background: #f0f4ff;
+        }
+        .nav a:hover {
+            background: #667eea;
+            color: white;
+            transform: scale(1.05);
+        }
+        .content {
+            color: #555;
+            line-height: 1.8;
+            font-size: 1.1em;
+            text-align: center;
+        }
+        .badge {
+            display: inline-block;
+            background: #4CAF50;
+            color: white;
+            padding: 6px 16px;
+            border-radius: 50px;
+            font-size: 0.9em;
+            margin-top: 15px;
+        }
+        .timestamp {
+            margin-top: 20px;
+            color: #999;
+            font-size: 0.9em;
+        }
+        .footer {
+            margin-top: 40px;
+            color: rgba(255,255,255,0.8);
+            text-align: center;
+            font-size: 0.9em;
+        }
+        @media (max-width: 600px) {
+            .container { padding: 20px; }
+            h1 { font-size: 2em; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🚀 Flask App</h1>
+        
+        <div class="nav">
+            <a href="{{ url_for('home') }}">🏠 Home</a>
+            <a href="{{ url_for('about') }}">ℹ️ About</a>
+            <a href="{{ url_for('status') }}">📊 Status</a>
+        </div>
+
+        <div class="content">
+            {% block content %}{% endblock %}
+        </div>
+
+        <div class="timestamp">
+            Deployed via Jenkins on Azure App Service
+        </div>
+    </div>
+    <div class="footer">
+        © 2026 Flask + Jenkins + Azure
+    </div>
+</body>
+</html>

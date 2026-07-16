@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+    <h2>Hello from Azure App Service!</h2>
+    <p>This application was successfully deployed through Jenkins CI/CD pipeline.</p>
+    <p style="margin-top: 20px; font-size: 1.2em;">✅ Deployment Status: <span style="color: #4CAF50; font-weight: bold;">Live</span></p>
+    <span class="badge">🎯 Jenkins Build #{{ build_number or 'Latest' }}</span>
+{% endblock %}

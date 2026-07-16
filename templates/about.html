@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block title %}About{% endblock %}
+
+{% block content %}
+    <h2>ℹ️ About This App</h2>
+    <p>This is a simple Flask application running on <strong>Azure App Service</strong>.</p>
+    <p>It demonstrates a complete CI/CD pipeline using:</p>
+    <div style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin: 20px 0;">
+        <span style="background: #f0f4ff; padding: 8px 16px; border-radius: 50px;">🐍 Flask</span>
+        <span style="background: #f0f4ff; padding: 8px 16px; border-radius: 50px;">⚡ Jenkins</span>
+        <span style="background: #f0f4ff; padding: 8px 16px; border-radius: 50px;">☁️ Azure</span>
+        <span style="background: #f0f4ff; padding: 8px 16px; border-radius: 50px;">🐳 Docker</span>
+    </div>
+    <p style="margin-top: 20px;">Version: <strong>1.0.0</strong></p>
+{% endblock %}
